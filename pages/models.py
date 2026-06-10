@@ -416,18 +416,24 @@ class ActivityLog(models.Model):
 # Django signals to auto-create profile and cart when a new User is created
 @receiver(post_save, sender=User)
 def create_user_profile_and_cart(sender, instance, created, **kwargs):
+    if kwargs.get('raw'):
+        return
     if created:
         UserProfile.objects.get_or_create(user=instance)
         Cart.objects.get_or_create(user=instance)
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
+    if kwargs.get('raw'):
+        return
     if hasattr(instance, 'profile'):
         instance.profile.save()
 
 
 @receiver(post_save, sender=Product)
 def create_or_update_product_inventory(sender, instance, created, **kwargs):
+    if kwargs.get('raw'):
+        return
     inventory, _ = Inventory.objects.get_or_create(product=instance)
     inventory.quantity = instance.stock
     inventory.save()
