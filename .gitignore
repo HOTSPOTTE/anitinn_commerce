@@ -7,3 +7,5 @@ staticfiles/
 media/
 fixtures/sqlite_datadump.json
 .pgdata/
+.vercel
+.env*
