@@ -42,6 +42,10 @@
   </style>
   <title>{% block title %}{{ page_title|default:"Anitinn" }}{% endblock %} · Anitinn</title>
   {% block extra_head %}{% endblock %}
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
   {% block body %}{% endblock %}
